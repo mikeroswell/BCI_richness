@@ -117,7 +117,6 @@ for(i in 2:nrow(BCI)-1){
     )}
 }
 
-summary(BCI_raref)
 
 # besides more complicated, what's different this time? Try to summarize what
 # the code chunk above is doing in a few sentences.
