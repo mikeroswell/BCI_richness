@@ -101,21 +101,23 @@ BCI_accum %>% ggplot(aes(plots, species)) +
 
 
 # now we'll make a similar, but more abstract plot
-reps<-50
+reps<-35
 
 BCI_raref<-data.frame()
 
 for(i in 2:nrow(BCI)-1){
   for(j in 1:reps){
-    BCI_raref[(i-1)*100+j #reason I don't use for loops anymore!
+    BCI_raref[(i-1)*reps+j #reason I don't use for loops anymore!
               ,"plots"] <- i 
-    BCI_raref[(i-1)*100+j, "species"] <- raw_rich(
+    BCI_raref[(i-1)*reps+j, "species"] <- raw_rich(
       colSums(BCI[
         sample(1:nrow(BCI), i, replace =T) # random set of rows (plots) 
         , ]
       )
     )}
 }
+
+summary(BCI_raref)
 
 # besides more complicated, what's different this time? Try to summarize what
 # the code chunk above is doing in a few sentences.
@@ -131,9 +133,9 @@ BCI_raref %>% ggplot(aes(plots, species)) +
 
 # can you make a good guess based on this curve?
 
-# I think the answer might be around 480 species of tree. 
+# I think the real answer might be around 480 species of tree. 
 
-iNEXT::ChaoSpecies(t((BCI>0)), datatype = "incidence_raw") # I think this is using the Chao2 estimator. 
+iNEXT::ChaoSpecies(t((BCI>0)), datatype = "incidence_raw") # the Chao2 estimator, one of the cleverest. 
 
 # as you may have heard, I have some skepticism about richness estimators
 
